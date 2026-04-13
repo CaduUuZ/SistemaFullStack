@@ -1,42 +1,56 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/auth/login", {
+      const res = await api.post("/auth/login", {
         email,
-        password,
+        password
       });
 
       localStorage.setItem("token", res.data.token);
-      window.location.href = "/admin/dashboard";
-    } catch (err) {
-      alert("Credenciais inválidas");
+      router.push("/admin/dashboard");
+    } catch (err: any) {
+      setError("Credenciais inválidas");
     }
   };
 
   return (
-    <div className="flex flex-col gap-4 p-10">
-      <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        className="border p-2"
-      />
-      <input
-        type="password"
-        placeholder="Senha"
-        onChange={(e) => setPassword(e.target.value)}
-        className="border p-2"
-      />
-      <button onClick={handleLogin} className="bg-blue-500 text-white p-2">
-        Entrar
-      </button>
+    <div className="flex h-screen items-center justify-center">
+      <div className="bg-white p-6 rounded-xl shadow w-80">
+        <h1 className="text-xl font-bold mb-4">Login</h1>
+
+        <input
+          className="w-full mb-2 p-2 border rounded"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          className="w-full mb-2 p-2 border rounded"
+          placeholder="Senha"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        {error && <p className="text-red-500">{error}</p>}
+
+        <button
+          onClick={handleLogin}
+          className="w-full bg-blue-500 text-white p-2 rounded mt-2"
+        >
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }
