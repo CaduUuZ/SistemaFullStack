@@ -16,16 +16,24 @@ export default function AdminLayout({ children }: any) {
 
   return (
     <div className="flex">
+      {/* SIDEBAR */}
       <div className="w-64 bg-gray-800 text-white h-screen p-4">
         <h2 className="text-lg font-bold">Painel</h2>
 
         <ul className="mt-4 space-y-2">
-          <li><a href="/admin/dashboard">Dashboard</a></li>
-          <li><a href="/admin/usuarios">Usuários</a></li>
-          <li><a href="/admin/produtos">Produtos</a></li>
+          <li>
+            <a href="/admin/dashboard">Dashboard</a>
+          </li>
+          <li>
+            <a href="/admin/usuarios">Usuários</a>
+          </li>
+          <li>
+            <a href="/admin/produtos">Produtos</a>
+          </li>
         </ul>
       </div>
 
+      {/* CONTEÚDO */}
       <div className="flex-1 p-6 bg-gray-100">
         {children}
       </div>
