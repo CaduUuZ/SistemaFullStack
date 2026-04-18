@@ -1,52 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import api from "../../services/api";
 import { useRouter } from "next/navigation";
+import api from "../../services/api";
 
-export default function LoginPage() {
+export default function Login() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
 
   const handleLogin = async () => {
     try {
       const res = await api.post("/auth/login", {
         email,
-        password
+        password,
       });
 
+      // salva token
       localStorage.setItem("token", res.data.token);
+
+      // redireciona
       router.push("/admin/dashboard");
-    } catch (err: any) {
-      setError("Credenciais inválidas");
+    } catch (error) {
+      alert("Credenciais inválidas");
     }
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="bg-white p-6 rounded-xl shadow w-80">
-        <h1 className="text-xl font-bold mb-4">Login</h1>
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-500 to-indigo-600">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-96">
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          🚀 Bem-vindo
+        </h1>
 
         <input
-          className="w-full mb-2 p-2 border rounded"
+          className="w-full p-3 border rounded-xl mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
-          type="password"
-          className="w-full mb-2 p-2 border rounded"
+          className="w-full p-3 border rounded-xl mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Senha"
+          type="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        {error && <p className="text-red-500">{error}</p>}
-
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-500 text-white p-2 rounded mt-2"
+          className="w-full px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition shadow-md"
         >
           Entrar
         </button>
