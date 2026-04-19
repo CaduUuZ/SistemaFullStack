@@ -17,7 +17,7 @@ export default function Produtos() {
 
   const [errors, setErrors] = useState<any>({});
 
-  // 🔄 BUSCAR PRODUTOS
+  // BUSCAR PRODUTOS
   const fetchProducts = async () => {
     const res = await api.get("/products");
     setProducts(res.data);
@@ -27,7 +27,7 @@ export default function Produtos() {
     fetchProducts();
   }, []);
 
-  // ✅ VALIDAÇÃO
+  // VALIDAÇÃO
   const validate = () => {
     let newErrors: any = {};
 
@@ -55,7 +55,7 @@ export default function Produtos() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // 💾 SALVAR (CREATE + UPDATE)
+  // SALVAR (CREATE + UPDATE)
   const handleSave = async () => {
     if (!validate()) return;
 
@@ -85,7 +85,7 @@ export default function Produtos() {
     }
   };
 
-  // ❌ EXCLUIR
+  // EXCLUIR
   const handleDelete = async (id: string) => {
     if (!confirm("Deseja excluir?")) return;
 

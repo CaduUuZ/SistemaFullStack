@@ -31,7 +31,7 @@ export default function Login() {
     <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-500 to-indigo-600">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-96">
         <h1 className="text-2xl font-bold mb-6 text-center">
-          🚀 Bem-vindo
+          Bem-vindo
         </h1>
 
         <input

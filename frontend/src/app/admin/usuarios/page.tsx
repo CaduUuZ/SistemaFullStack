@@ -17,7 +17,7 @@ export default function Usuarios() {
 
   const [errors, setErrors] = useState<any>({});
 
-  // 🔄 Buscar usuários
+  // Buscar usuários
   const fetchUsers = async () => {
     const res = await api.get("/users");
     setUsers(res.data);
@@ -27,7 +27,7 @@ export default function Usuarios() {
     fetchUsers();
   }, []);
 
-  // ✅ VALIDAÇÃO
+  // VALIDAÇÃO
   const validate = () => {
     let newErrors: any = {};
 
@@ -53,7 +53,7 @@ export default function Usuarios() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // 💾 SALVAR
+  // SALVAR
   const handleSave = async () => {
     if (!validate()) return;
 
@@ -80,7 +80,7 @@ export default function Usuarios() {
     }
   };
 
-  // ❌ DELETE
+  // DELETE
   const handleDelete = async (id: string) => {
     if (!confirm("Deseja excluir?")) return;
 
